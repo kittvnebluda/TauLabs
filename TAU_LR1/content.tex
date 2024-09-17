@@ -1,0 +1,22 @@
+\section*{Задание 1. Одноканальная система в форме вход-выход}
+
+Имеем данное дифференциальное уравнение (у меня 8 вариант)
+\begin{equation*}
+    \dddot y + 9\ddot y + 26\dot y + 24 y = 2\ddot u +6\dot u +8 u,
+\end{equation*}
+преобразуем его немного:
+\begin{equation*}
+    p^3y=2p^2u+6pu+8u-9p^2y-26py-24y,
+\end{equation*}
+% \begin{equation*}
+%     y=\frac{1}{p}2u+\frac{1}{p^2}6u+\frac{1}{p^3}8u-\frac{1}{p}9y-\frac{1}{p^2}26y-\frac{1}{p^3}24y,
+% \end{equation*}
+\begin{equation*}
+    y=\frac{1}{p^3}[2p^2[u]+6p[u]+8u-9p^2[y]-26p[y]-24y],
+\end{equation*}
+\begin{equation*}
+    y=\frac{1}{p^3}[2\ddot u+6\dot u+8u-9\ddot y-26\dot y-24y].
+\end{equation*}
+Далее будем выполнять моделирование для $u(t)=1$ и нулевым начальных условиях.
+
+\includesvg{figs/task1_y.svg}
