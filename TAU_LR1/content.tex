@@ -1,6 +1,6 @@
 \section*{Задание 1. Одноканальная система в форме вход-выход}
 
-Имеем данное дифференциальное уравнение (у меня 8 вариант)
+Имеем данное дифференциальное уравнение:
 \begin{equation*}
     \dddot y + 9\ddot y + 26\dot y + 24 y = 2\ddot u +6\dot u +8 u,
 \end{equation*}
@@ -17,6 +17,100 @@
 \begin{equation*}
     y=\frac{1}{p^3}[2\ddot u+6\dot u+8u-9\ddot y-26\dot y-24y].
 \end{equation*}
-Далее будем выполнять моделирование для $u(t)=1$ и нулевым начальных условиях.
+Моделирование (см. схему на рисунке \ref{fig:task_1_slx}) для $u(t)=1$ и 
+нулевым начальных условиях можно увидеть на рисунке \ref{fig:task_1_y} - график сигнала $y(t)$,
+график сигнала $u(t)$ очевиден - константа, так что его график опущен.
 
-\includesvg{figs/task1_y.svg}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\linewidth]{figs/task_1_slx.png}
+    \caption{Структурная схема системы для задания 1.}
+    \label{fig:task_1_slx}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\linewidth]{figs/task_1_out.png}
+    \caption{Графики сигнала $y(t)$ для задания 1.}
+    \label{fig:task_1_y}
+\end{figure}
+
+
+
+
+\section*{Задание 2. Переход от формы вход-выход к форме вход-состояние-выход}
+
+Для системы из Задания 1 определим передаточную функцию $W(p)$ (ПФ):
+$$
+(p^3+9p^2+26p+24)[y]=(2p^2+6p+8)[u],
+$$
+\begin{equation}
+    \label{eq:pf1}
+    W(p)=\frac{2p^2+6p+8}{p^3+9p^2+26p+24}.
+\end{equation}
+Построим  математические модели вход-состояние-выход (В-С-В):
+\begin{equation*}
+    \begin{cases}
+        \dot x = Ax + Bu,\\
+        y = Cx + Du.
+    \end{cases}
+\end{equation*}
+
+\begin{enumerate}
+    \item Каноническая управляемая форма.
+\begin{equation*}
+    \begin{array}{cc}
+        A_y=\begin{bmatrix}
+            0 & 1 & 0 \\
+            0 & 0 & 1 \\
+            -24 & -26 & -9
+        \end{bmatrix}, &
+        B_y=\begin{bmatrix}
+            0 \\ 0 \\ 1
+        \end{bmatrix}, \\[7mm]
+        C_y=\begin{bmatrix}
+            8 & 6 & 2
+        \end{bmatrix}, &
+        D_y=0.
+    \end{array}
+\end{equation*}
+    \item Каноническая наблюдаемая форма.
+    \begin{equation*}
+        \begin{array}{cc}
+            A_\text{н}=\begin{bmatrix}
+                0 & 0 & -24 \\
+                1 & 0 & -26 \\
+                0 & 1 & -9
+            \end{bmatrix}, &
+            B_\text{н}=\begin{bmatrix}
+                8 \\ 6 \\ 2
+            \end{bmatrix}, \\[7mm]
+            C_\text{н}=\begin{bmatrix}
+                0 & 0 & 1
+            \end{bmatrix}, &
+            D_\text{н}=0.
+        \end{array}
+    \end{equation*}
+    \item Каноническая диагональная форма.
+    Для начала разобъем ПФ из уравнения \ref{eq:pf1} на простые дроби и получим
+    \begin{equation*}
+        \frac{2}{p+2}-\frac{8}{p+3}+\frac{8}{p+4}.
+    \end{equation*}
+    Теперь можем получить матрицы:
+    \begin{equation*}
+        \begin{array}{cc}
+            A_\text{Д}=\begin{bmatrix}
+                -2 & 0 & 0 \\
+                0 & -3 & 0 \\
+                0 & 0 & -4
+            \end{bmatrix}, &
+            B_\text{Д}=\begin{bmatrix}
+                2 \\ -8 \\ 8
+            \end{bmatrix}, \\[7mm]
+            C_\text{Д}=\begin{bmatrix}
+                1 & 1 & 1
+            \end{bmatrix}, &
+            D_\text{Д}=0.
+        \end{array}
+    \end{equation*}
+\end{enumerate}
