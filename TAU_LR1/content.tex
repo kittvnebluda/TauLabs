@@ -31,7 +31,7 @@
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.7\linewidth]{figs/task_1_out.png}
-    \caption{Графики сигнала $y(t)$ для задания 1.}
+    \caption{График сигнала $y(t)$ для задания 1.}
     \label{fig:task_1_y}
 \end{figure}
 
@@ -57,7 +57,9 @@ $$
 \end{equation*}
 
 \begin{enumerate}
-    \item Каноническая управляемая форма.
+    \item Каноническая управляемая форма. Структурную схему можно увидеть
+    на рисунке \ref{fig:task2_slx_ctrl}, а график выхода на рисунке 
+    \ref{fig:task2_out_ctrl_y}.
 \begin{equation*}
     \begin{array}{cc}
         A_y=\begin{bmatrix}
@@ -74,7 +76,22 @@ $$
         D_y=0.
     \end{array}
 \end{equation*}
-    \item Каноническая наблюдаемая форма.
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\linewidth]{figs/task_2_slx_ctrl.png}
+    \caption{Структурная схема канонической управляемой формы.}
+    \label{fig:task2_slx_ctrl}
+\end{figure}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\linewidth]{figs/task_2_out_ctrl_y.png}
+    \caption{Графики сигнала $y(t)$ канонической управляемой формы.}
+    \label{fig:task2_out_ctrl_y}
+\end{figure}
+
+    \item Каноническая наблюдаемая форма.Структурную схему можно увидеть
+    на рисунке \ref{fig:task2_slx_wtch}, а график выхода на рисунке 
+    \ref{fig:task2_out_wtch_y}.
     \begin{equation*}
         \begin{array}{cc}
             A_\text{н}=\begin{bmatrix}
@@ -91,7 +108,22 @@ $$
             D_\text{н}=0.
         \end{array}
     \end{equation*}
-    \item Каноническая диагональная форма.
+    \begin{figure}[htbp]
+        \centering
+        \includegraphics[width=\linewidth]{figs/task_2_slx_wtch.png}
+        \caption{Структурная схема канонической наблюдаемой формы.}
+        \label{fig:task2_slx_wtch}
+    \end{figure}
+    \begin{figure}[htbp]
+        \centering
+        \includegraphics[width=0.7\linewidth]{figs/task_2_out_wtch_y.png}
+        \caption{Графики сигнала $y(t)$ канонической наблюдаемой формы.}
+        \label{fig:task2_out_wtch_y}
+    \end{figure}
+
+    \item Каноническая диагональная форма.Структурную схему можно увидеть
+    на рисунке \ref{fig:task2_slx_diag}, а график выхода на рисунке 
+    \ref{fig:task2_out_diag_y}.
     Для начала разобъем ПФ из уравнения \ref{eq:pf1} на простые дроби и получим
     \begin{equation*}
         \frac{2}{p+2}-\frac{8}{p+3}+\frac{8}{p+4}.
@@ -113,4 +145,58 @@ $$
             D_\text{Д}=0.
         \end{array}
     \end{equation*}
+    \begin{figure}[htbp]
+        \centering
+        \includegraphics[width=\linewidth]{figs/task_2_slx_diag.png}
+        \caption{Структурная схема канонической диагональной формы.}
+        \label{fig:task2_slx_diag}
+    \end{figure}
+    \begin{figure}[htbp]
+        \centering
+        \includegraphics[width=0.7\linewidth]{figs/task_2_out_diag_y.png}
+        \caption{Графики сигнала $y(t)$ канонической диагональной формы.}
+        \label{fig:task2_out_diag_y}
+    \end{figure}
 \end{enumerate}
+
+Графики моделирования канонических форм имеют одинаковые графики выхода,
+но заметим, что они отличаются от первоначального графика из задания 1,
+а отличаются только более резким ростом и "ямкой" перед выходом
+у уствновившемуся значению, и не понятно, от чего эти различия.
+
+
+
+\section*{Задание 3. Многоканальная система в форме вход-выход}
+
+В соответствии с моим вариантом рассмотрим систему
+\begin{equation*}
+    A(p)y(y)=B(p)u(t),
+\end{equation*}
+где
+\begin{equation*}
+    \begin{array}{cc}
+        A(p)=\begin{bmatrix}
+            p+17&p+5\\
+            p+4&p+2
+        \end{bmatrix}, &
+        B(p)=\begin{bmatrix}
+            6&8\\4&3
+        \end{bmatrix}.        
+    \end{array}
+\end{equation*}
+Передаточная матрица (ПМ) для данной системы будет равна
+\begin{equation*}
+    W(p)=A^{-1}(p)B(p),
+\end{equation*}
+для ее нахождения найдем обратную матрицу $A(p)$:
+\begin{equation*}
+    A^{-1}(p)=\frac{1}{10p+14}\begin{bmatrix}
+        p+2&-p-5\\-p-4&p+17
+    \end{bmatrix},
+\end{equation*}
+тогда ПМ будет равна
+\begin{equation*}
+    W(p)=\frac{1}{10p+14}\begin{bmatrix}
+        2p-8&5p+1\\-2p+44&-5p+19
+    \end{bmatrix}.
+\end{equation*}
