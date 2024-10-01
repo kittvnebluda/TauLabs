@@ -200,3 +200,81 @@ $$
         2p-8&5p+1\\-2p+44&-5p+19
     \end{bmatrix}.
 \end{equation*}
+
+
+Для того чтобы подготовить систему для симуляции в SIMULINK, раскроем матричное уравнение.
+Пусть $y(t)=\begin{bmatrix}y_1(t)\\y_2(t)\end{bmatrix}$, 
+а $u(t)=\begin{bmatrix}u_1(t)\\u_2(t)\end{bmatrix}$.
+Теперь распишем систему дифференциальных уравнений:
+\begin{equation*}
+    \begin{array}{c}
+        (p+17)y_1(t)+(p+5)y_2(t)=6u_1(t)+8u_2(t),\\[2mm]
+        p[y_1(t)]+17y_1(t)+p[y_2(t)]+5y_2(t)=6u_1(t)+8u_2(t),\\[2mm]
+        y_1(t)=\frac{1}{p}6u_1(t)+\frac{1}{p}8u_2(t)-\frac{1}{p}5y_2(t)-\frac{1}{p}17y_1(t)-y_2(t),
+    \end{array}
+\end{equation*}
+так же
+\begin{equation*}
+    \begin{array}{c}
+        (p+4)y_1(t)+(p+2)y_2(t)=4u_1(t)+3u_2(t),\\[2mm]
+        p[y_1(t)]+4y_1(t)+p[y_2(t)]+2y_2(t)=4u_1(t)+3u_2(t),\\[2mm]
+        y_2(t)=\frac{1}{p}4u_1(t)+\frac{1}{p}3u_2(t)-\frac{1}{p}2y_2(t)-\frac{1}{p}4y_1(t)-y_1(t).
+    \end{array}
+\end{equation*}
+Я попытался сделать структурную схему, которую можно увидеть на рисунке 
+\ref{fig:task3_slx}, но SIMULINK не захотел нормально это чудо симулировать,
+сначало говорил, что имеется сингулярность, при уменьшении шага все посчитал, но
+графики $y_1(t)$ и $y_2(t)$ выдал какие-то невменяемые, на них ничего не видно.
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\linewidth]{figs/task_3_slx.png}
+    \caption{Структурная схема задания 3.}
+    \label{fig:task3_slx}
+\end{figure}
+
+
+
+\section*{Задание 4. Многоканальная система в форме вход-состояние-выход}
+
+Имеем матрицы MIMO системы
+\begin{equation*}
+    \begin{array}{ccc}
+        A=\begin{bmatrix}
+            0&-2\\1&-7
+        \end{bmatrix},&
+        B=\begin{bmatrix}
+            3&0\\2&7
+        \end{bmatrix},&
+        C=\begin{bmatrix}
+            0&7\\4&6
+        \end{bmatrix}.
+    \end{array}
+\end{equation*}
+Для дальнейшего построения структурной схемы раскроем матричное произведение:
+\begin{equation*}
+    \begin{array}{c}
+        \dot x_1=-2x_2+3u_1,\\[2mm]
+        x_1=\frac{1}{p}[3u_1-2x_2],
+    \end{array}
+\end{equation*}
+\begin{equation*}
+    \begin{array}{c}
+        \dot x_2=x_1-7x_2+2u_1+7u_2,\\[2mm]
+        x_2=\frac{1}{p}[2u_1+7u_2-7x_2-x_1].
+    \end{array}
+\end{equation*}
+Получившуюся схему можно увидеть на рисунке \ref{fig:task4_slx}, а графики входа,
+вывода и состояния системы можно увидеть на рисунке \ref{fig:task4_out}.
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\linewidth]{figs/task_4_slx.png}
+    \caption{Структурная схема задания 4.}
+    \label{fig:task4_slx}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\linewidth]{figs/task_4_out.png}
+    \caption{Графики входа, вывода и состояния системы из задания 4.}
+    \label{fig:task4_out}
+\end{figure}
