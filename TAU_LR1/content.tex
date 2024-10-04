@@ -15,7 +15,10 @@
     y=\frac{1}{p^3}[2p^2[u]+6p[u]+8u-9p^2[y]-26p[y]-24y],
 \end{equation*}
 \begin{equation*}
-    y=\frac{1}{p^3}[2\ddot u+6\dot u+8u-9\ddot y-26\dot y-24y].
+    y=\frac{1}{p^3}[2\ddot u+6\dot u+8u-9\ddot y-26\dot y-24y],
+\end{equation*}
+\begin{equation*}
+    y=\frac{1}{p}[2u]+\frac{1}{p^2}[6u]+\frac{1}{p^3}[8u]-\frac{1}{p}[9y]-\frac{1}{p^2}[26y]-\frac{1}{p^3}[24y].
 \end{equation*}
 Моделирование (см. схему на рисунке \ref{fig:task_1_slx}) для $u(t)=1$ и 
 нулевым начальных условиях можно увидеть на рисунке \ref{fig:task_1_y} - график сигнала $y(t)$,
@@ -31,7 +34,7 @@
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.7\linewidth]{figs/task_1_out.png}
-    \caption{График сигнала $y(t)$ для задания 1.}
+    \caption{График выхода $y(t)$ и входа $u(t)$ для задания 1.}
     \label{fig:task_1_y}
 \end{figure}
 
@@ -160,9 +163,7 @@ $$
 \end{enumerate}
 
 Графики моделирования канонических форм имеют одинаковые графики выхода,
-но заметим, что они отличаются от первоначального графика из задания 1,
-а отличаются только более резким ростом и "ямкой" перед выходом
-у уствновившемуся значению, и не понятно, от чего эти различия.
+как и график симуляции диффура из задания 1, все сходится.
 
 
 
@@ -210,7 +211,8 @@ $$
     \begin{array}{c}
         (p+17)y_1(t)+(p+5)y_2(t)=6u_1(t)+8u_2(t),\\[2mm]
         p[y_1(t)]+17y_1(t)+p[y_2(t)]+5y_2(t)=6u_1(t)+8u_2(t),\\[2mm]
-        y_1(t)=\frac{1}{p}6u_1(t)+\frac{1}{p}8u_2(t)-\frac{1}{p}5y_2(t)-\frac{1}{p}17y_1(t)-y_2(t),
+        y_1(t)=\frac{1}{p}6u_1(t)+\frac{1}{p}8u_2(t)-\frac{1}{p}5y_2(t)-\frac{1}{p}17y_1(t)-y_2(t),\\[2mm]
+        y_1(t)=\frac{1}{p}\left[6u_1(t)+8u_2(t)-5y_2(t)-17y_1(t)\right]-y_2(t),
     \end{array}
 \end{equation*}
 так же
@@ -218,18 +220,25 @@ $$
     \begin{array}{c}
         (p+4)y_1(t)+(p+2)y_2(t)=4u_1(t)+3u_2(t),\\[2mm]
         p[y_1(t)]+4y_1(t)+p[y_2(t)]+2y_2(t)=4u_1(t)+3u_2(t),\\[2mm]
-        y_2(t)=\frac{1}{p}4u_1(t)+\frac{1}{p}3u_2(t)-\frac{1}{p}2y_2(t)-\frac{1}{p}4y_1(t)-y_1(t).
+        y_2(t)=\frac{1}{p}4u_1(t)+\frac{1}{p}3u_2(t)-\frac{1}{p}2y_2(t)-\frac{1}{p}4y_1(t)-y_1(t),\\[2mm]
+        y_2(t)=\frac{1}{p}\left[4u_1(t)+3u_2(t)-2y_2(t)-4y_1(t)\right]-y_1(t).
     \end{array}
 \end{equation*}
-Я попытался сделать структурную схему, которую можно увидеть на рисунке 
-\ref{fig:task3_slx}, но SIMULINK не захотел нормально это чудо симулировать,
-сначало говорил, что имеется сингулярность, при уменьшении шага все посчитал, но
-графики $y_1(t)$ и $y_2(t)$ выдал какие-то невменяемые, на них ничего не видно.
+Я попытался сделать структурную схему из элементарных операций, но ее не смог 
+симулировать SIMULINK, поэтому использовал блоки передаточных функций, итоговую
+схему можно увидеть на рисунке \ref{fig:task3_slx}. Графики входов и выходов
+можно увидеть на рисунке \ref{fig:task3_out}.
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=1\linewidth]{figs/task_3_slx.png}
     \caption{Структурная схема задания 3.}
     \label{fig:task3_slx}
+\end{figure}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\linewidth]{figs/task_3_out.png}
+    \caption{Графики входа, вывода из задания 3.}
+    \label{fig:task3_out}
 \end{figure}
 
 
