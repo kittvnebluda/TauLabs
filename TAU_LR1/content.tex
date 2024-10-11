@@ -1,10 +1,10 @@
-\section*{Задание 1. Одноканальная система в форме вход-выход}
+\section{Одноканальная система в форме вход-выход}
 
 Имеем данное дифференциальное уравнение:
 \begin{equation*}
     \dddot y + 9\ddot y + 26\dot y + 24 y = 2\ddot u +6\dot u +8 u,
 \end{equation*}
-преобразуем его немного:
+преобразуем его:
 \begin{equation*}
     p^3y=2p^2u+6pu+8u-9p^2y-26py-24y,
 \end{equation*}
@@ -21,8 +21,7 @@
     y=\frac{1}{p}[2u]+\frac{1}{p^2}[6u]+\frac{1}{p^3}[8u]-\frac{1}{p}[9y]-\frac{1}{p^2}[26y]-\frac{1}{p^3}[24y].
 \end{equation*}
 Моделирование (см. схему на рисунке \ref{fig:task_1_slx}) для $u(t)=1$ и 
-нулевым начальных условиях можно увидеть на рисунке \ref{fig:task_1_y} - график сигнала $y(t)$,
-график сигнала $u(t)$ очевиден - константа, так что его график опущен.
+нулевых начальных условиях можно увидеть на рисунке \ref{fig:task_1_y}.
 
 \begin{figure}[htbp]
     \centering
@@ -33,7 +32,7 @@
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.7\linewidth]{figs/task_1_out.png}
+    \includegraphics[width=0.9\linewidth]{figs/task_1_out.png}
     \caption{График выхода $y(t)$ и входа $u(t)$ для задания 1.}
     \label{fig:task_1_y}
 \end{figure}
@@ -41,7 +40,8 @@
 
 
 
-\section*{Задание 2. Переход от формы вход-выход к форме вход-состояние-выход}
+\section{Переход от формы вход-выход к форме В-С-В}
+
 
 Для системы из Задания 1 определим передаточную функцию $W(p)$ (ПФ):
 $$
@@ -49,8 +49,22 @@ $$
 $$
 \begin{equation}
     \label{eq:pf1}
-    W(p)=\frac{2p^2+6p+8}{p^3+9p^2+26p+24}.
+    W(p)=\frac{2p^2+6p+8}{p^3+9p^2+26p+24},
 \end{equation}
+cделаем схему для нее (см. на рисунке \ref{fig:task2_slx_tf}) и симулируем 
+(см. графики на рисунке \ref{fig:task2_out_tf}).
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.6\linewidth]{figs/task_2_slx_tf.png}
+    \caption{Структурная схема моделирования передаточной функции.}
+    \label{fig:task2_slx_tf}
+\end{figure}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\linewidth]{figs/task_2_out_tf.png}
+    \caption{Графики сигналов $y(t)$ и $u(t)$ передаточной функции.}
+    \label{fig:task2_out_tf}
+\end{figure}
 Построим  математические модели вход-состояние-выход (В-С-В):
 \begin{equation*}
     \begin{cases}
@@ -61,7 +75,7 @@ $$
 
 \begin{enumerate}
     \item Каноническая управляемая форма. Структурную схему можно увидеть
-    на рисунке \ref{fig:task2_slx_ctrl}, а график выхода на рисунке 
+    на рисунке \ref{fig:task2_slx_ctrl}, а графики симуляции на рисунке 
     \ref{fig:task2_out_ctrl_y}.
 \begin{equation*}
     \begin{array}{cc}
@@ -81,19 +95,19 @@ $$
 \end{equation*}
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=\linewidth]{figs/task_2_slx_ctrl.png}
+    \includegraphics[width=0.8\linewidth]{figs/task_2_slx_ctrl.png}
     \caption{Структурная схема канонической управляемой формы.}
     \label{fig:task2_slx_ctrl}
 \end{figure}
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.7\linewidth]{figs/task_2_out_ctrl_y.png}
-    \caption{Графики сигнала $y(t)$ канонической управляемой формы.}
+    \includegraphics[width=0.9\linewidth]{figs/task_2_out_ctrl_y.png}
+    \caption{Графики сигналов $y(t)$ и $u(t)$ канонической управляемой формы.}
     \label{fig:task2_out_ctrl_y}
 \end{figure}
 
     \item Каноническая наблюдаемая форма.Структурную схему можно увидеть
-    на рисунке \ref{fig:task2_slx_wtch}, а график выхода на рисунке 
+    на рисунке \ref{fig:task2_slx_wtch}, а графики симуляции на рисунке 
     \ref{fig:task2_out_wtch_y}.
     \begin{equation*}
         \begin{array}{cc}
@@ -113,19 +127,19 @@ $$
     \end{equation*}
     \begin{figure}[htbp]
         \centering
-        \includegraphics[width=\linewidth]{figs/task_2_slx_wtch.png}
+        \includegraphics[width=0.9\linewidth]{figs/task_2_slx_wtch.png}
         \caption{Структурная схема канонической наблюдаемой формы.}
         \label{fig:task2_slx_wtch}
     \end{figure}
     \begin{figure}[htbp]
         \centering
-        \includegraphics[width=0.7\linewidth]{figs/task_2_out_wtch_y.png}
-        \caption{Графики сигнала $y(t)$ канонической наблюдаемой формы.}
+        \includegraphics[width=\linewidth]{figs/task_2_out_wtch_y.png}
+        \caption{Графики сигналов $y(t)$ и $u(t)$ канонической наблюдаемой формы.}
         \label{fig:task2_out_wtch_y}
     \end{figure}
 
     \item Каноническая диагональная форма.Структурную схему можно увидеть
-    на рисунке \ref{fig:task2_slx_diag}, а график выхода на рисунке 
+    на рисунке \ref{fig:task2_slx_diag}, а графики симуляции на рисунке 
     \ref{fig:task2_out_diag_y}.
     Для начала разобъем ПФ из уравнения \ref{eq:pf1} на простые дроби и получим
     \begin{equation*}
@@ -150,24 +164,31 @@ $$
     \end{equation*}
     \begin{figure}[htbp]
         \centering
-        \includegraphics[width=\linewidth]{figs/task_2_slx_diag.png}
+        \includegraphics[width=0.9\linewidth]{figs/task_2_slx_diag.png}
         \caption{Структурная схема канонической диагональной формы.}
         \label{fig:task2_slx_diag}
     \end{figure}
     \begin{figure}[htbp]
         \centering
-        \includegraphics[width=0.7\linewidth]{figs/task_2_out_diag_y.png}
-        \caption{Графики сигнала $y(t)$ канонической диагональной формы.}
+        \includegraphics[width=0.9\linewidth]{figs/task_2_out_diag_y.png}
+        \caption{Графики сигналов $y(t)$ и $u(t)$ канонической диагональной формы.}
         \label{fig:task2_out_diag_y}
     \end{figure}
 \end{enumerate}
 
 Графики моделирования канонических форм имеют одинаковые графики выхода,
-как и график симуляции диффура из задания 1, все сходится.
+как и график симуляции диффура из задания 1, что можно увидеть на рисунке \ref{fig:task2_out_y_comp}.
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\linewidth]{figs/task_2_out_y_comp.png}
+    \caption{Графики сигнала $y(t)$ разных форм представления системы.}
+    \label{fig:task2_out_y_comp}
+\end{figure}
 
 
 
-\section*{Задание 3. Многоканальная система в форме вход-выход}
+\section{Многоканальная система в форме вход-выход}
+
 
 В соответствии с моим вариантом рассмотрим систему
 \begin{equation*}
@@ -243,7 +264,7 @@ $$
 
 
 
-\section*{Задание 4. Многоканальная система в форме вход-состояние-выход}
+\section{Многоканальная система в форме В-С-В}
 
 Имеем матрицы MIMO системы
 \begin{equation*}
@@ -269,7 +290,7 @@ $$
 \begin{equation*}
     \begin{array}{c}
         \dot x_2=x_1-7x_2+2u_1+7u_2,\\[2mm]
-        x_2=\frac{1}{p}[2u_1+7u_2-7x_2-x_1].
+        x_2=\frac{1}{p}[2u_1+7u_2-7x_2+x_1].
     \end{array}
 \end{equation*}
 Получившуюся схему можно увидеть на рисунке \ref{fig:task4_slx}, а графики входа,
@@ -287,3 +308,12 @@ $$
     \caption{Графики входа, вывода и состояния системы из задания 4.}
     \label{fig:task4_out}
 \end{figure}
+
+
+
+\section{Вывод}
+
+Были рассмотрены различные формы представления линейных динамических
+систем: одноканальная В-В, одноканальные канонические управляемая, наблюдаемая,
+диагональная В-С-В, многоканальная В-В, многоканальная В-С-В. Для них были составлены
+уравнения, построены и симулированы схемы в SIMULINK.

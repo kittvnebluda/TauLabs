@@ -1,16 +1,25 @@
-% XeLaTeX document
 \documentclass[12pt,a4paper]{article}
 
+% Includes for external settings, packages, and configurations
 \include{config}
-
 \include{settings/packages}
-
 \include{settings/preferences}
+
+\setlength{\headheight}{15pt}
+
+% Fancyhdr setup
+\pagestyle{fancy}
+\fancyhf{} % Clear all header/footer
+\fancyhead[L]{Лабораторная работа \num} % Left side of header
+\fancyhead[R]{\leftmark} % Right side of header, with section title
+
+% Redefine \sectionmark to update \leftmark correctly
+\renewcommand{\sectionmark}[1]{\markboth{#1}{}}
 
 \begin{document}
 
+% Include titlepage and content
 \include{templates/titlepage}
-
 \include{content}
 
 \end{document}
