@@ -50,7 +50,7 @@
 на рисунке \ref{fig:task_1_out_1}.
 
 Как можно видеть, система стала устойчивой и сходится к нулю - единственной точке равновесия
-линейных систем.
+линейных систем, в отличии от системы задания 1.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{figs/task_1_out_1.png}
@@ -94,6 +94,7 @@
 
 
 
+
 \section{Задача слежения для системы с П регулятором}
 
 Рассмотрим замкнутую систему, заданную структурной схемой на рисунке \ref{fig:task_3_xls}.
@@ -125,18 +126,23 @@
 \end{multline*}
 Тогда найдем установившиеся значения для наших $k$ по формуле
 \begin{equation*}
-    y_\text{уст}=A-\frac{A}{1+2k}.
+    y_\text{уст}=A-\frac{A}{1+2k},
 \end{equation*}
-\[
-\begin{array}{c|c}
-\hline
-k_i & y_\text{уст}\\[2mm]
--0.25 & -1.00 \\[2mm]
-5 & \frac{10}{11}\approx0.91 \\[2mm]
-10 & \frac{20}{21}\approx0.95 \\[2mm]
-\hline
-\end{array}
-\]
+которые можно увидеть в таблице \ref{tab:task_3_out}.
+\begin{table}[H]
+    \centering
+    \caption{Установившиеся значения ошибок для системы с пропорциональным регулятором в стационарном режиме}
+    \begin{tabular}{|c|c|}
+        \hline
+        $k_i$ & $y_\text{уст}$\\[2mm]
+        -0.25 & -1.00 \\[2mm]
+        5 & $\frac{10}{11}\approx0.91$ \\[2mm]
+        10 & $\frac{20}{21}\approx0.95$ \\[2mm]
+        \hline
+    \end{tabular}
+    \label{tab:task_3_out}
+\end{table}
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{figs/task_3_out.png}
@@ -181,24 +187,26 @@ k_i & y_\text{уст}\\[2mm]
 константным сигналом установившаяся ошибка должна быть равна нулю, для движения с постоянной 
 скорость установившаясяошибка будет константна, а если следить за входным сигналом с 
 постоянным ускорением, то ошибка будет постоянно увеличиваться. Аналитически найдем
-установившуюся ошибку для слежения за сигналом с постоянной скоростью:
+установившуюся ошибку для слежения за сигналом с постоянной скоростью, которые можно
+увидеть в таблице \ref{tab:task_4_out}, по формуле
 \begin{multline*}
     \lim_{t\rightarrow\infty}e(t)=\lim_{s\rightarrow0}sE(s)=\lim_{s\rightarrow0}sG(s)\underset{g\rightarrow e}{W}(s)
     =\lim_{s\rightarrow0}\left(s\cdot\frac{V}{s^2}\cdot\frac{s(0.5s^2+2s+1)}{0.5s^3+2s^2+s+2k}\right)
     =\frac{V}{2k}=\frac{1}{k}.
 \end{multline*}
-
-\[
-\begin{array}{c|c}
-\hline
-k_i & e_\text{уст}\\[2mm]
-0.1 & 10.00 \\[2mm]
-0.5 & 2.00 \\[2mm]
-0.9 & 1.11 \\[2mm]
-\hline
-\end{array}
-\]
-
+\begin{table}[H]
+    \centering
+    \caption{Установившиеся значения ошибок для системы с интегральным регулятором в режиме движения с постоянной скоростью (см. рис \ref{fig:task_4_out_linear})}
+    \begin{tabular}{|c|c|}
+        \hline
+        $k_i$ & $e_\text{уст}$\\[2mm]
+        0.1 & 10.00 \\[2mm]
+        0.5 & 2.00 \\[2mm]
+        0.9 & 1.11 \\[2mm]
+        \hline
+    \end{tabular}
+    \label{tab:task_4_out}
+\end{table}
 Результаты моделирования можно видеть на рисунках \ref{fig:task_4_out_constant}, 
 \ref{fig:task_4_out_linear} и \ref{fig:task_4_out_quadratic}. Все сходится с выводами выше.
 
@@ -216,7 +224,7 @@ k_i & e_\text{уст}\\[2mm]
 \end{figure}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.85\textwidth]{figs/task_4_out_quadratic.png}
+    \includegraphics[width=0.9\textwidth]{figs/task_4_out_quadratic.png}
     \caption{Графики выхода и ошибки системы с интегральным регулятором в режиме движения с постоянным ускорением}
     \label{fig:task_4_out_quadratic}
 \end{figure}
@@ -293,7 +301,7 @@ $k_i$: $k_{i1}=0.1,\ k_{i2}=2,\ k_{i3}=6$; тогда все пары $(k_p,k_i)
 \end{figure}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.9\textwidth]{figs/task_5_out_1_linear.png}
+    \includegraphics[width=0.85\textwidth]{figs/task_5_out_1_linear.png}
     \caption{Графики выхода и ошибки системы с ПИ регулятором в режиме движения с постоянной скоростью без $k_i=0.1$}
     \label{fig:task_5_out_1_linear}
 \end{figure}
@@ -330,7 +338,7 @@ $k_i$: $k_{i1}=0.1,\ k_{i2}=2,\ k_{i3}=6$; тогда все пары $(k_p,k_i)
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{figs/task_6_out_harmonic.png}
+    \includegraphics[width=0.8\textwidth]{figs/task_6_out_harmonic.png}
     \caption{Графики выхода и ошибки системы со специальным регулятором в режиме слежения за гармоническим сигналом}
     \label{fig:task_6_out}
 \end{figure}
