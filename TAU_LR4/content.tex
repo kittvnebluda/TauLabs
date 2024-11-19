@@ -84,7 +84,7 @@
 системы необходимо, чтобы $T$ была в интервале $(0;0.26)$, результаты 
 моделирования для трех значений из этого интервала можно увидеть
 на рисунке \ref{fig:task_2_out}. И чем меньше $T$, тем с меньшим
-перерегулированием работает система. 
+перерегулированием работает система, идеальное дифференцирующее звено сработало лучше.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.9\textwidth]{figs/task_2_out.png}
@@ -178,22 +178,40 @@
 \end{equation*}
 --- интегральный регулятор. Исследуем систему, чтобы найти при каких $k$ она асимптотически
 устойчива. ПФ по ошибке
-\begin{multline*}
+\begin{equation*}
     \underset{g\rightarrow e}{W}(s)=\frac{1}{1+\frac{2k}{s(0.5s^2+2s+1)}}=\frac{1}{\frac{0.5s^3+2s^2+s+2k}{s(0.5s^2+2s+1)}}=\frac{s(0.5s^2+2s+1)}{0.5s^3+2s^2+s+2k}.
-\end{multline*}
+\end{equation*}
 Тогда, используя следствие из критерия Гурвица, для асимптотической устойчивости системы
 необходимо, чтобы $0<k<1$. Выберем $k$: $k_1=0.1,\ k_2=0.5,\ k_3=0.9$.
 Как можно видеть по ПФ, система имеет первый порядок астатизма, откуда следует, что при слежении за
-константным сигналом установившаяся ошибка должна быть равна нулю, для движения с постоянной 
-скорость установившаясяошибка будет константна, а если следить за входным сигналом с 
-постоянным ускорением, то ошибка будет постоянно увеличиваться. Аналитически найдем
-установившуюся ошибку для слежения за сигналом с постоянной скоростью, которые можно
-увидеть в таблице \ref{tab:task_4_out}, по формуле
+константным сигналом ($g(t)=A$) установившаяся ошибка должна быть равна нулю, подтвердим это расчетами:
 \begin{multline*}
-    \lim_{t\rightarrow\infty}e(t)=\lim_{s\rightarrow0}sE(s)=\lim_{s\rightarrow0}sG(s)\underset{g\rightarrow e}{W}(s)
-    =\lim_{s\rightarrow0}\left(s\cdot\frac{V}{s^2}\cdot\frac{s(0.5s^2+2s+1)}{0.5s^3+2s^2+s+2k}\right)
-    =\frac{V}{2k}=\frac{1}{k}.
+    \lim_{t\rightarrow\infty}e(t)
+    =\lim_{s\rightarrow0}sE(s)
+    =\lim_{s\rightarrow0}sG(s)\underset{g\rightarrow e}{W}(s)
+    =\lim_{s\rightarrow0}\left(s\cdot A\cdot\frac{s(0.5s^2+2s+1)}{0.5s^3+2s^2+s+2k}\right)
+    =0,
 \end{multline*}
+вывод был верным, для движения с постоянной 
+скорость ($g(t)=Vt$) установившаяся ошибка будет константой, подтвердим это расчетами:
+\begin{multline*}
+    \lim_{t\rightarrow\infty}e(t)
+    =\lim_{s\rightarrow0}sE(s)
+    =\lim_{s\rightarrow0}sG(s)\underset{g\rightarrow e}{W}(s)
+    =\lim_{s\rightarrow0}\left(s\cdot\frac{V}{s^2}\cdot\frac{s(0.5s^2+2s+1)}{0.5s^3+2s^2+s+2k}\right)
+    =\frac{V}{2k}=\frac{1}{k},
+\end{multline*}
+вывод был верным, расчитанные установившиеся значения можно увидеть в таблице \ref{tab:task_4_out},
+если следить за входным сигналом с 
+постоянным ускорением ($g(t)=\frac{at^2}{2}$), то ошибка будет постоянно увеличиваться, подтвердим это расчетами:
+\begin{multline*}
+    \lim_{t\rightarrow\infty}e(t)
+    =\lim_{s\rightarrow0}sE(s)
+    =\lim_{s\rightarrow0}sG(s)\underset{g\rightarrow e}{W}(s)
+    =\lim_{s\rightarrow0}\left(s\cdot\frac{a}{s^3}\cdot\frac{s(0.5s^2+2s+1)}{0.5s^3+2s^2+s+2k}\right)
+    =\infty.
+\end{multline*}
+
 \begin{table}[H]
     \centering
     \caption{Установившиеся значения ошибок для системы с интегральным регулятором в режиме движения с постоянной скоростью (см. рис \ref{fig:task_4_out_linear})}
@@ -289,27 +307,81 @@ $k_i$: $k_{i1}=0.1,\ k_{i2}=2,\ k_{i3}=6$; тогда все пары $(k_p,k_i)
     \label{tab:task_5_out}
 \end{table}
 
-Как можно видеть на рисунке \ref{fig:task_5_out_linear}, наибольшую установившуюся ошибку
-имеют три набора пар $k_{p1}=5,\ k_{i1}=0.1,\ k_{p2}=10,\ k_{i2}=0.1,\ k_{p3}=20,\ k_{i3}=0.1$,
-их объединяет малый $k_i$. При слежении за гармоническим сигналом и $k_p$, и $k_i$
-уменьшают перерегулирование и ошибку.
+Симуляцию при линейном входе можно видеть на рисунках \ref{fig:task_5_out_linear_ki0.1}, \ref{fig:task_5_out_linear_ki2.0} и \ref{fig:task_5_out_linear_ki6.0},
+при гармоническом входе - на рисунках \ref{fig:task_5_out_harmonic_ki0.1}, \ref{fig:task_5_out_harmonic_ki2.0} и \ref{fig:task_5_out_harmonic_ki6.0},
+так же, поскольку на графиках при линейном входе выходы сливаются, на рисунках \ref{fig:task_5_output_ki_0.1}, \ref{fig:task_5_output_ki_2.0} и \ref{fig:task_5_output_ki_6.0}
+выходы рассмотрены при малых $t$.
+
+Эспериментальное установившееся значения при линейном входе были записаны в таблицу \ref{tab:task_5_out}, наибольшую установившуюся ошибку
+имеют три набора пар (см. Рис. \ref{fig:task_5_out_linear_ki0.1}) $k_{p1}=5,\ k_{i1}=0.1,\ k_{p2}=10,\ k_{i2}=0.1,\ k_{p3}=20,\ k_{i3}=0.1$,
+им потребовалось больше всего времени на установление.
+их объединяет малый $k_i$. При слежении за гармоническим сигналом регулятор справился очень плохо
+при любых рассмотренных коэффициентах.
+
+% Линейный сигнал
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.9\textwidth]{figs/task_5_out_linear.png}
-    \caption{Графики выхода и ошибки системы с ПИ регулятором в режиме движения с постоянной скоростью}
-    \label{fig:task_5_out_linear}
+    \includegraphics[width=0.85\textwidth]{figs/task_5_out_linear_ki0.1.png}
+    \caption{Графики выхода системы с ПИ регулятором при линейном входном сигнале (\( k_i = 0.1 \)).}
+    \label{fig:task_5_out_linear_ki0.1}
 \end{figure}
+
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.85\textwidth]{figs/task_5_out_1_linear.png}
-    \caption{Графики выхода и ошибки системы с ПИ регулятором в режиме движения с постоянной скоростью без $k_i=0.1$}
-    \label{fig:task_5_out_1_linear}
+    \includegraphics[width=0.85\textwidth]{figs/task_5_out_linear_ki2.0.png}
+    \caption{Графики выхода системы с ПИ регулятором при линейном входном сигнале (\( k_i = 2.0 \)).}
+    \label{fig:task_5_out_linear_ki2.0}
 \end{figure}
+
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.9\textwidth]{figs/task_5_out_harmonic.png}
-    \caption{Графики выхода и ошибки системы с ПИ регулятором в режиме слежения за гармоническим сигналом}
-    \label{fig:task_5_out_harmonic}
+    \includegraphics[width=0.85\textwidth]{figs/task_5_out_linear_ki6.0.png}
+    \caption{Графики выхода системы с ПИ регулятором при линейном входном сигнале (\( k_i = 6.0 \)).}
+    \label{fig:task_5_out_linear_ki6.0}
+\end{figure}
+
+% Гармонический сигнал
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{figs/task_5_out_harmonic_ki0.1.png}
+    \caption{Графики выхода системы с ПИ регулятором при гармоническом входном сигнале (\( k_i = 0.1 \)).}
+    \label{fig:task_5_out_harmonic_ki0.1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{figs/task_5_out_harmonic_ki2.0.png}
+    \caption{Графики выхода системы с ПИ регулятором при гармоническом входном сигнале (\( k_i = 2.0 \)).}
+    \label{fig:task_5_out_harmonic_ki2.0}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{figs/task_5_out_harmonic_ki6.0.png}
+    \caption{Графики выхода системы с ПИ регулятором при гармоническом входном сигнале (\( k_i = 6.0 \)).}
+    \label{fig:task_5_out_harmonic_ki6.0}
+\end{figure}
+
+% Линейный маленький t
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{figs/task_5_output_linear_small_t_ki_0.1.png}
+    \caption{Графики выхода системы с ПИ регулятором при линейном входном сигнале (\( k_i = 0.1 \)) на малых $t$.}
+    \label{fig:task_5_output_ki_0.1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{figs/task_5_output_linear_small_t_ki_2.0.png}
+    \caption{Графики выхода системы с ПИ регулятором при линейном входном сигнале (\( k_i = 2.0 \)) на малых $t$.}
+    \label{fig:task_5_output_ki_2.0}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{figs/task_5_output_linear_small_t_ki_6.0.png}
+    \caption{Графики выхода системы с ПИ регулятором при линейном входном сигнале (\( k_i = 6.0 \)) на малых $t$.}
+    \label{fig:task_5_output_ki_6.0}
 \end{figure}
 
 
@@ -345,7 +417,7 @@ $k_i$: $k_{i1}=0.1,\ k_{i2}=2,\ k_{i3}=6$; тогда все пары $(k_p,k_i)
 
 
 
-\section{Вывод}
+\section{Заключение}
 
 В процессе выполнения лабораторной работы была решена задача стабилизации
 неустойчивой системы с ПД регулятором в двух ``формах'': с идеальным дифференцирующим звеном
