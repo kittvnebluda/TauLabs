@@ -239,8 +239,8 @@ $\xi=\frac{R\sqrt{J}}{2\sqrt{Lk_mk_e}}=0.3228$.
     \begin{split}
         &W(j\omega)=\frac{K}{T^2(j\omega)^2+2\xi T (j\omega)+1},\\
         &D=4\xi^2T^2-4T^2=4T^2(\xi^2-1)\approx-0.080,\\
-        &(i\omega)=\frac{-2\xi T\pm\sqrt{D}}{2T^2}\approx-2.166\pm j6.352,\\
-        &W(j\omega)=\frac{K}{(2.166+j(\omega-6.352))(2.166+j(\omega-6.352))}=\frac{K}{A_1(\omega)A_2(\omega)}e^{-j(\varphi_1(\omega)+\varphi_2(\omega))},
+        &i\omega=\frac{-2\xi T\pm\sqrt{D}}{2T^2}\approx-2.166\pm j6.352,\\
+        &W(j\omega)=\frac{K}{(2.166+j(\omega-6.352))(2.166+j(\omega+6.352))}=\frac{K}{A_1(\omega)A_2(\omega)}e^{-j(\varphi_1(\omega)+\varphi_2(\omega))},
     \end{split}
 \end{equation*}
 где 
@@ -428,7 +428,20 @@ $\xi=\frac{R\sqrt{J}}{2\sqrt{Lk_mk_e}}=0.3228$.
 \end{equation*}
 тогда
 \begin{equation*}
-    A(\omega)=\left| \frac{K}{1-T^2\omega^2} \right|,\quad \varphi(\omega)=\text{atan2}\left( 0,\ \frac{K}{1-T^2\omega^2} \right), \quad L(\omega)=20\log_{10}K-20\log_{10}\left| 1-T^2\omega^2 \right|.
+    A(\omega)=\left| \frac{K}{1-T^2\omega^2} \right|, \quad L(\omega)=20\log_{10}K-20\log_{10}\left| 1-T^2\omega^2 \right|.
+\end{equation*}
+Так как имеем нулевую Imaginary часть, угол может быть только $\pi\cdot n,\ n\in\mathbb{Z}$, что
+зависит от знака вещественной части, и так как $K$ положительно, нас интересует только $1-T^2\omega^2$ ---
+это парабола с ветвями вниз и не трудно заметить, что корни $\pm\frac{1}{T}$, значит от $0$ до $\frac{1}{T}\approx 3.3$
+угол равен нулю, а потом разрыв и угол становится равным $180$ или $-180$? Посмотрев на график АЧХ
+(см Рис \ref{fig:task_4_АФЧХ}), мы видим, что амплитуда убывает после $3.3$, а в силу 
+минимально-фазовости угол должен быть отрицателен, значит $\varphi=-180$ градусов. Значит имеем такую прерывистую функцию
+фазы:
+\begin{equation*}
+    \varphi(\omega)=\begin{cases}
+        0,& 0\leq\omega<\frac{1}{T},\\
+        -\pi,& \omega>\frac{1}{T}.
+    \end{cases}
 \end{equation*}
 Графики АФЧХ и ЛАФЧХ можно посмотреть на рисунках \ref{fig:task_4_АФЧХ} и \ref{fig:task_4_ЛАФЧХ}.
 
