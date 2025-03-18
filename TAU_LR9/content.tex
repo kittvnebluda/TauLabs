@@ -17,7 +17,44 @@
 \begin{equation*}
     \sigma(A)=\{2\pm i,\ -2\}.
 \end{equation*}
-Построив матрицы Хаутуса, делаем вывод, что сопряженная пара
+Построив матрицы Хаутуса
+\begin{equation*}
+H_1 = 
+\begin{bmatrix}
+\lambda_1 I - A & B
+\end{bmatrix} =
+\begin{bmatrix}
+-1 + 1i & -5 & -4 & 2 \\
+2 & 6 + 1i & 5 & -1 \\
+-2 & -2 & -1 + 1i & 1
+\end{bmatrix},\quad
+\text{rank}(H_1) = 3,
+\end{equation*}
+\begin{equation*}
+H_2 = 
+\begin{bmatrix}
+\lambda_2 I - A & B
+\end{bmatrix} =
+\begin{bmatrix}
+-1 - 1i & -5 & -4 & 2 \\
+2 & 6 - 1i & 5 & -1 \\
+-2 & -2 & -1 - 1i & 1
+\end{bmatrix},\quad
+\text{rank}(H_2) = 3,
+\end{equation*}
+\begin{equation*}
+H_3 = 
+\begin{bmatrix}
+\lambda_3 I - A & B
+\end{bmatrix} =
+\begin{bmatrix}
+-5 & -5 & -4 & 2 \\
+2 & 2 & 5 & -1 \\
+-2 & -2 & -5 & 1
+\end{bmatrix},\quad
+\text{rank}(H_3) = 2,
+\end{equation*}
+делаем вывод, что сопряженная пара
 собственных чисел управляема, а вещественное число $-2$ - нет,
 но так как оно отрицательное, то система стабилизируема, хотя и
 не полностю управляема. 
@@ -79,8 +116,19 @@
 \begin{equation*}
     A_J^*P-P\Gamma = B_J^*Y,
 \end{equation*}
-где $\Gamma$ - матрица, имеющая интересующий нас спектр, а $Y$ подобрана так, чтобы
-пара $(\Gamma, Y)$ была наблюдаема. Решение находим с помощью CVX и далее получаем
+где $\Gamma$ - матрица, имеющая интересующий нас спектр, который не должен пересекаться
+со спектром $A_J^*$, а $Y$ подобрана так, чтобы
+пара $(\Gamma, Y)$ была наблюдаема. Были взяты следующие матрицы
+\begin{equation*}
+    \Gamma=\begin{bmatrix}
+        -2&  1\\
+        0& -2
+    \end{bmatrix},\quad
+    Y=\begin{bmatrix}
+        1& 0
+    \end{bmatrix}.
+\end{equation*}
+Решение находим с помощью CVX и далее получаем
 желаемую матрицу:
 \begin{equation*}
     K_J^*=-YP^{-1}=\begin{bmatrix}
@@ -101,14 +149,6 @@
         -1.8000	&-1.8000	&-6.2001
     \end{bmatrix}
 \end{equation*}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\linewidth]{figs/task1_1.png}
-    \caption{Управление и состояние системы с модальным регулятором для первого спектра}
-    \label{fig:1_1}
-\end{figure}
-
 \noindent и проверим результат
 \begin{equation*}
     \sigma(A+BK)=\{-1.9873,\ 
@@ -123,9 +163,33 @@ $x(0) =\begin{bmatrix}
     1 & 1 & 1
 \end{bmatrix}^T$, что можно увидеть на \autoref{fig:1_1}.
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{figs/task1_1.png}
+    \caption{Управление и состояние системы с модальным регулятором для первого спектра}
+    \label{fig:1_1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{figs/task1_2.png}
+    \caption{Управление и состояние системы с модальным регулятором для второго спектра}
+    \label{fig:1_2}
+\end{figure}
+
 \subsubsection{Второй спектр}
 
-Получим спектр $\{-2,\ -20,\ -200\}$. Аналогично находим $K_J^*$ с помощью CVX
+Получим спектр $\{-2,\ -20,\ -200\}$. Были взяты следующие матрицы
+\begin{equation*}
+    \Gamma=\begin{bmatrix}
+        -20&  0\\
+        0& -200
+    \end{bmatrix},\quad
+    Y=\begin{bmatrix}
+        1& 1
+    \end{bmatrix}.
+\end{equation*}
+Аналогично находим $K_J^*$ с помощью CVX
 \begin{equation*}
     K_J^*=\begin{bmatrix}
         -1916.7&	-533.3050
@@ -152,16 +216,20 @@ $x(0) =\begin{bmatrix}
     1 & 1 & 1
 \end{bmatrix}^T$, что можно увидеть на \autoref{fig:1_2}.
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\linewidth]{figs/task1_2.png}
-    \caption{Управление и состояние системы с модальным регулятором для второго спектра}
-    \label{fig:1_2}
-\end{figure}
 
 \subsubsection{Третий спектр}
 
-Получим спектр $\{-2,\ -2\pm 6i\}$. Аналогично находим $K_J^*$ с помощью CVX
+Получим спектр $\{-2,\ -2\pm 6i\}$. Были взяты следуюзие матрицы
+\begin{equation*}
+    \Gamma=\begin{bmatrix}
+        -2&  6\\
+        -6& -2
+    \end{bmatrix},\quad
+    Y=\begin{bmatrix}
+        1& 1
+    \end{bmatrix}.
+\end{equation*}
+Аналогично находим $K_J^*$ с помощью CVX
 \begin{equation*}
     K_J^*=\begin{bmatrix}
         -22.7691&	-3.8184
@@ -190,7 +258,7 @@ $x(0) =\begin{bmatrix}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.9\linewidth]{figs/task1_3.png}
+    \includegraphics[width=0.8\linewidth]{figs/task1_3.png}
     \caption{Управление и состояние системы с модальным регулятором для третьего спектра}
     \label{fig:1_3}
 \end{figure}
@@ -248,9 +316,60 @@ $x(0) =\begin{bmatrix}
     \end{bmatrix}.
     \label{eq:2}
 \end{equation}
-Спектр матрицы $\sigma(A)= \{\pm3i,\ \pm i\}.$ Построив матрицы Хаутуса, 
-делаем вывод, что все собственные числа наблюдаемы. Следовательно
-система полностью наблюдаема, а тогда и обнаруживаема.
+Спектр матрицы $\sigma(A)= \{\pm3i,\ \pm i\}.$ Построив матрицы Хаутуса
+\begin{equation*}
+H_1 = \begin{bmatrix}
+    \lambda_1 I - A \\ C
+    \end{bmatrix} =
+\begin{bmatrix}
+-25 + 3i & -8 & 20 & -13 \\
+38 & 11 + 3i & -30 & 18 \\
+-40 & -13 & 33 + 3i & -21 \\
+-38 & -12 & 32 & -19 + 3i \\
+7 & 2 & -5 & 3
+\end{bmatrix},\quad
+\text{rank}(H_1) = 4,
+\end{equation*}
+\begin{equation*}
+H_2 = \begin{bmatrix}
+    \lambda_2 I - A \\ C
+    \end{bmatrix} =
+\begin{bmatrix}
+-25 - 3i & -8 & 20 & -13 \\
+38 & 11 - 3i & -30 & 18 \\
+-40 & -13 & 33 - 3i & -21 \\
+-38 & -12 & 32 & -19 - 3i \\
+7 & 2 & -5 & 3
+\end{bmatrix},\quad
+\text{rank}(H_2) = 4,
+\end{equation*}
+\begin{equation*}
+H_3 = \begin{bmatrix}
+    \lambda_3 I - A \\ C
+    \end{bmatrix} =
+\begin{bmatrix}
+-25 + 1i & -8 & 20 & -13 \\
+38 & 11 + 1i & -30 & 18 \\
+-40 & -13 & 33 + 1i & -21 \\
+-38 & -12 & 32 & -19 + 1i \\
+7 & 2 & -5 & 3
+\end{bmatrix},\quad
+\text{rank}(H_3) = 4,
+\end{equation*}
+\begin{equation*}
+H_4 = \begin{bmatrix}
+    \lambda_4 I - A \\ C
+    \end{bmatrix} =
+\begin{bmatrix}
+-25 - 1i & -8 & 20 & -13 \\
+38 & 11 - 1i & -30 & 18 \\
+-40 & -13 & 33 - 1i & -21 \\
+-38 & -12 & 32 & -19 - 1i \\
+7 & 2 & -5 & 3
+\end{bmatrix},\quad
+\text{rank}(H_4) = 4,
+\end{equation*}
+по рангу определяем, что система полностью наблюдаема, а тогда и обнаруживаема.
 Построим структурную схему системы \ref{eq:2} c наблюдателем состояния
 $\dot{\hat x}=A\hat x+L(C\hat x - y),$ которую можно увидеть на \autoref{fig:2}.
 
@@ -280,7 +399,8 @@ $\dot{\hat x}=A\hat x+L(C\hat x - y),$ которую можно увидеть 
 \begin{equation*}
     \Gamma Q-QA=YC,
 \end{equation*}
-где $\Gamma$ - матрица, имеющая интересующий нас спектр, а $Y$ подобрана так, чтобы
+где $\Gamma$ - матрица, имеющая интересующий нас спектр, который не должен пересекаться
+со спектром $A$, а $Y$ подобрана так, чтобы
 пара $(\Gamma, Y)$ была управляема. Были выбраны такие матрицы
 \begin{equation*}
     \Gamma=\begin{bmatrix}
@@ -390,13 +510,11 @@ $x(0) = \begin{bmatrix}
 Проверим, что получен желаемый спектр
 \begin{equation*}
     \sigma(A+LC)=\{
-        -1.0000 + 3.0000i,\ 
-        -1.0000 - 3.0000i,\ 
-        -1.0000 + 2.0000i,\ 
-        -1.0000 - 2.0000i
+        -1.0000 \pm 3.0000i,\ 
+        -1.0000 \pm 2.0000i
         \}.
 \end{equation*}
-Желаемый спектр успешно получен.
+Желаемый спектр успешно получен с точностью до 4 знаков после запятой.
 Выполним моделирование с начальными условиями системы 
 $x(0) = \begin{bmatrix}
     1 & 1 & 1 & 1
@@ -461,8 +579,513 @@ $x(0) = \begin{bmatrix}
 \section{Модальное управление по выходу}
 
 Рассмотрим систему 
-\begin{equation*}
+\begin{equation}
     \begin{cases}
-        
+        \dot x = Ax+Bu,\\
+        y = Cx +Du,
     \end{cases}
+    \label{eq:3}
+\end{equation}
+где
+\begin{equation*}
+    A=\begin{bmatrix}
+        5& -5& -9& 3\\
+        -5& 5& -3& 9\\
+        -9& -3& 5& 5\\
+        3& 9& 5& 5
+    \end{bmatrix},\quad
+    B=\begin{bmatrix}
+        2\\
+        6\\
+        6\\
+        2
+    \end{bmatrix},\quad
+    C=\begin{bmatrix}
+        1& -1& 1& 1\\
+        1& 3& -1& 3
+    \end{bmatrix},\quad
+    D=\begin{bmatrix}
+        2\\1
+    \end{bmatrix}.
 \end{equation*}
+Собственные числа матрицы $A$
+\begin{equation*}
+    \sigma(A)=\{-12,\ 4,\ 12,\ 16\}.
+\end{equation*}
+Построив матрицы Хаутуса
+\begin{equation*}
+H_1 = \begin{bmatrix}
+    \lambda_1 I - A & B
+    \end{bmatrix} =
+\begin{bmatrix}
+-17 & 5 & 9 & -3 & 2 \\
+5 & -17 & 3 & -9 & 6 \\
+9 & 3 & -17 & -5 & 6 \\
+-3 & -9 & -5 & -17 & 2
+\end{bmatrix},\quad
+\text{rank}(H_1) = 4,
+\end{equation*}
+\begin{equation*}
+H_2 = \begin{bmatrix}
+    \lambda_2 I - A & B
+    \end{bmatrix} =
+\begin{bmatrix}
+-1 & 5 & 9 & -3 & 2 \\
+5 & -1 & 3 & -9 & 6 \\
+9 & 3 & -1 & -5 & 6 \\
+-3 & -9 & -5 & -1 & 2
+\end{bmatrix},\quad
+\text{rank}(H_2) = 4,
+\end{equation*}
+\begin{equation*}
+H_3 = \begin{bmatrix}
+    \lambda_3 I - A & B
+    \end{bmatrix} =
+\begin{bmatrix}
+7 & 5 & 9 & -3 & 2 \\
+5 & 7 & 3 & -9 & 6 \\
+9 & 3 & 7 & -5 & 6 \\
+-3 & -9 & -5 & 7 & 2
+\end{bmatrix},\quad
+\text{rank}(H_3) = 4,
+\end{equation*}
+\begin{equation*}
+H_4 = \begin{bmatrix}
+    \lambda_4 I - A & B
+    \end{bmatrix} =
+\begin{bmatrix}
+11 & 5 & 9 & -3 & 2 \\
+5 & 11 & 3 & -9 & 6 \\
+9 & 3 & 11 & -5 & 6 \\
+-3 & -9 & -5 & 11 & 2
+\end{bmatrix},\quad
+\text{rank}(H_4) = 4,
+\end{equation*}
+\begin{equation*}
+H_5 = \begin{bmatrix}
+    \lambda_1 I - A \\ C
+    \end{bmatrix} =
+\begin{bmatrix}
+-17 & 5 & 9 & -3 \\
+5 & -17 & 3 & -9 \\
+9 & 3 & -17 & -5 \\
+-3 & -9 & -5 & -17 \\
+1 & -1 & 1 & 1 \\
+1 & 3 & -1 & 3
+\end{bmatrix},\quad
+\text{rank}(H_5) = 3,
+\end{equation*}
+\begin{equation*}
+H_6 = \begin{bmatrix}
+    \lambda_2 I - A \\ C
+    \end{bmatrix} =
+\begin{bmatrix}
+-1 & 5 & 9 & -3 \\
+5 & -1 & 3 & -9 \\
+9 & 3 & -1 & -5 \\
+-3 & -9 & -5 & -1 \\
+1 & -1 & 1 & 1 \\
+1 & 3 & -1 & 3
+\end{bmatrix},\quad
+\text{rank}(H_6) = 4,
+\end{equation*}
+\begin{equation*}
+H_7 = \begin{bmatrix}
+    \lambda_3 I - A \\ C
+    \end{bmatrix} =
+\begin{bmatrix}
+7 & 5 & 9 & -3 \\
+5 & 7 & 3 & -9 \\
+9 & 3 & 7 & -5 \\
+-3 & -9 & -5 & 7 \\
+1 & -1 & 1 & 1 \\
+1 & 3 & -1 & 3
+\end{bmatrix},\quad
+\text{rank}(H_7) = 4,
+\end{equation*}
+\begin{equation*}
+H_8 = \begin{bmatrix}
+    \lambda_4 I - A \\ C
+    \end{bmatrix} =
+\begin{bmatrix}
+11 & 5 & 9 & -3 \\
+5 & 11 & 3 & -9 \\
+9 & 3 & 11 & -5 \\
+-3 & -9 & -5 & 11 \\
+1 & -1 & 1 & 1 \\
+1 & 3 & -1 & 3
+\end{bmatrix},\quad
+\text{rank}(H_8) = 4,
+\end{equation*}
+делаем вывод, что все собственные числа управляемы,
+и что почти все собственные числа наблюдаемы, все кроме $-12$.
+Следовательно система полностью управляемая, стабилизируемая и не полностью
+наблюдаемая, но, так как собственное число $-12$ отрицательное, система
+обнаруживаемая.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{figs/task3_slx.png}
+    \caption{Схема моделирования системы \ref{eq:3} с модальным
+    управлением по выходу}
+    \label{fig:3}
+\end{figure}
+
+\noindent Зададимся парой устойчивых спектров $\{-2,\ -2,\ -2,\ -2\}$ и $\{-1,\ -1,\ -1,\ -1\}$.
+
+
+\subsection{Синтез модального регулятора}
+
+Возьмем следующие матрицы
+\begin{equation*}
+    \Gamma=\begin{bmatrix}
+        -2&  1& 0& 0\\
+        0& -2& 1& 0\\
+        0& 0& -2& 1\\
+        0& 0& 0& -2
+    \end{bmatrix},\quad
+    Y=\begin{bmatrix}
+        1& 0& 0& 0
+    \end{bmatrix}.
+\end{equation*}
+С помощью CVX найдем решение
+\begin{equation*}
+    K=\begin{bmatrix}
+        18.8807&	6.2847&	-19.1476&	5.7078
+    \end{bmatrix}.
+\end{equation*}
+Проверим корректность
+\begin{equation*}
+    \sigma(A+BK)=\{
+        -2.0021 \pm 0.0021i,\ 
+        -1.9979 \pm 0.0021i\}.
+\end{equation*}
+Желаемый спектр получен успешно с небольшой погрешностью.
+
+
+\subsection{Синтез модального наблюдателя}
+
+Возьмем следующие матрицы
+\begin{equation*}
+    \Gamma=\begin{bmatrix}
+        -1&  1& 0& 0\\
+        0& -1& 1& 0\\
+        0& 0& -1& 1\\
+        0& 0& 0& -1
+    \end{bmatrix},\quad
+    Y=\begin{bmatrix}
+        0& 0\\
+    0& 0\\
+    0& 0\\
+    1& 1
+    \end{bmatrix}.
+\end{equation*}
+Попробуем с помощью CVX найти решение, 
+так как собственное число $-12$ не наблюдаемо,
+оно в любом случае останется в спектре матрицы $A+LC$.
+Для начала попробуем не урезать систему.
+\begin{equation*}
+    L=\begin{bmatrix}
+        33.1954&	33.1954\\
+        -16.4391&	-16.4391\\
+        -33.8067&	-33.8067\\
+        -17.0504&	-17.0504
+    \end{bmatrix}.
+\end{equation*}
+Проверим корректность
+\begin{equation*}
+    \sigma(A+LC)=\{-0.8292,\ 
+    -0.9172,\ 
+    -0.9426,\ 
+    -12.0000\}.
+\end{equation*}
+Желаемый спектр получен, но с немаленькой погрешностью.
+Теперь урежем систему, матрицы в жордановой форме выглядят так
+($P$ - матрица перехода)
+\begin{equation*}
+    A_J=\begin{bmatrix}
+        16&     0&     0&     0\\
+        0&    12&     0&     0\\
+        0&     0&   -12&     0\\
+        0&     0&     0&     4
+    \end{bmatrix},\quad
+    C_J=\begin{bmatrix}
+        0&     0&     0&     4\\
+        4&     8&     0&     0
+    \end{bmatrix},\quad
+    P=\begin{bmatrix}
+        -1&     1&    -1&     1\\
+        1&     1&    -1&    -1\\
+        1&    -1&    -1&     1\\
+        1&     1&     1&     1
+    \end{bmatrix}.
+\end{equation*}
+Урежем их до
+\begin{equation*}
+    A_J^*=\begin{bmatrix}
+        16& 0& 0\\
+        0& 12& 0\\
+        0& 0& 4
+    \end{bmatrix},\quad
+    C_J^*=\begin{bmatrix}
+        0& 0& 4\\
+        4& 8& 0
+    \end{bmatrix}.
+\end{equation*}
+Для решения уравнения Сильвестра возьмем следующие матрицы
+\begin{equation*}
+    \Gamma=\begin{bmatrix}
+        -1&  1&  0\\
+        0& -1&  1\\
+        0&  0& -1
+    \end{bmatrix},\quad
+    Y=\begin{bmatrix}
+        0& 0\\
+        0& 0\\
+        1& 1
+    \end{bmatrix}.
+\end{equation*}
+CVX даст следующее решение
+\begin{equation*}
+    L_J^*=\begin{bmatrix}
+        -25.5885&	-25.5885\\
+        8.5820&	8.5820\\
+        -0.3255&	-0.3255
+    \end{bmatrix},
+\end{equation*}
+дополним нулями
+\begin{equation*}
+    L_J=\begin{bmatrix}
+        -25.5885&	-25.5885\\
+        8.5820&	8.5820\\
+        0&	0\\
+        -0.3255&	-0.3255
+    \end{bmatrix},
+\end{equation*}
+переведем в исходную систему
+\begin{equation*}
+    L=PL_J=\begin{bmatrix}
+        33.8451&	33.8451\\
+        -16.6810&	-16.6810\\
+        -34.4961&	-34.4961\\
+        -17.3320&	-17.3320
+    \end{bmatrix}.
+\end{equation*}
+Проверим полученный спектр
+\begin{equation*}
+    \sigma(A+LC)=\{-0.9998 + 0.0000i,\ 
+    -1.0001 \pm 0.0002i,\ 
+    -12.0000 + 0.0000i\}.
+\end{equation*}
+Спектр соответствует требованному с небольшой погрешностью.
+Выполним компьютерное моделирование с начальными условиями системы 
+$x(0) =\begin{bmatrix}
+    1&1&1&1
+\end{bmatrix}^T$ и наблюдателя $\hat x=\begin{bmatrix}
+    0&0&0&0
+\end{bmatrix}^T$. Графики формируемого 
+регулятором управления $u(t)$ и ошибки наблюдателя $e(t) = x(t) - \hat x(t),$
+сравнительные графики $x(t)$ и $\hat x(t)$ можно увидеть на рисунках \ref{fig:3_1}
+и \ref{fig:3_2}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{figs/task3_1.png}
+    \caption{Сравнительные графики $x$ и $\hat x$ системы с модальным 
+    управлением по выходу}
+    \label{fig:3_1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{figs/task3_2.png}
+    \caption{Графики управления $u(t)$ и невязки $e(t)$ системы с модальным 
+    управлением по выходу}
+    \label{fig:3_2}
+\end{figure}
+
+\subsection{Вывод}
+
+Система с модальным управлением по выходу успешно реализован.
+Как видно по графикам, наблюдатель отлично приближает состояние
+системы, а регулятор, с помощью этого приближенного состояния,
+заставил неустойчивую систему прийти к нулю.
+
+
+
+\section{Наблюдатель пониженного порядка}
+
+Рассмотрим систему \ref{eq:3}, но с матрицами
+\begin{equation*}
+    A=\begin{bmatrix}
+        5& -5& -9& 3\\
+        -5& 5& -3& 9\\
+        -9& -3& 5& 5\\
+        3& 9& 5& 5
+    \end{bmatrix},\quad
+    B=\begin{bmatrix}
+        2\\
+        6\\
+        6\\
+        2
+    \end{bmatrix},\quad
+    C=\begin{bmatrix}
+        0& 0& 0& 1\\
+        0& 1& 0& 0
+    \end{bmatrix},\quad
+    D=\begin{bmatrix}
+        2\\1
+    \end{bmatrix}.
+\end{equation*}
+Собственные числа матрицы $A$
+\begin{equation*}
+    \sigma(A)=\{-12,\ 4,\ 12,\ 16\}.
+\end{equation*}
+Изменилась матрица $C$, соответственно
+система осталась полностью управляема и стабилизируема. Построив матрицы
+Хаутуса
+\begin{equation*}
+H_1 = \begin{bmatrix}
+    \lambda_1 I - A \\ C
+    \end{bmatrix} =
+\begin{bmatrix}
+    -17 & 5 & 9 & -3 \\
+    5 & -17 & 3 & -9 \\
+    9 & 3 & -17 & -5 \\
+    -3 & -9 & -5 & -17 \\
+    0 & 0 & 0 & 1 \\
+    0 & 1 & 0 & 0
+\end{bmatrix},\quad
+\text{rank}(H_1) = 4,
+\end{equation*}
+\begin{equation*}
+H_2 = \begin{bmatrix}
+    \lambda_2 I - A \\ C
+    \end{bmatrix} =
+\begin{bmatrix}
+    -1 & 5 & 9 & -3 \\
+    5 & -1 & 3 & -9 \\
+    9 & 3 & -1 & -5 \\
+    -3 & -9 & -5 & -1 \\
+    0 & 0 & 0 & 1 \\
+    0 & 1 & 0 & 0
+\end{bmatrix},\quad
+\text{rank}(H_2) = 4,
+\end{equation*}
+\begin{equation*}
+H_3 = \begin{bmatrix}
+    \lambda_3 I - A \\ C
+    \end{bmatrix} =
+\begin{bmatrix}
+    7 & 5 & 9 & -3 \\
+    5 & 7 & 3 & -9 \\
+    9 & 3 & 7 & -5 \\
+    -3 & -9 & -5 & 7 \\
+    0 & 0 & 0 & 1 \\
+    0 & 1 & 0 & 0
+\end{bmatrix},\quad
+\text{rank}(H_3) = 4,
+\end{equation*}
+\begin{equation*}
+H_4 = \begin{bmatrix}
+    \lambda_4 I - A \\ C
+    \end{bmatrix} =
+\begin{bmatrix}
+    11 & 5 & 9 & -3 \\
+    5 & 11 & 3 & -9 \\
+    9 & 3 & 11 & -5 \\
+    -3 & -9 & -5 & 11 \\
+    0 & 0 & 0 & 1 \\
+    0 & 1 & 0 & 0
+\end{bmatrix},\quad
+\text{rank}(H_4) = 4,
+\end{equation*}
+оказывается, что система еще и полностью наблюдаема и обнаруживаема.
+Построим структурную схему \autoref{fig:4} системы \ref{eq:3} замкнутой регулятором,
+состоящем из наблюдателя состояния пониженного порядка
+$$
+\dot{\hat z}=\Gamma\hat z-Yy+(BQ+YD)u,\quad \hat x=\begin{bmatrix}
+    C\\ Q
+\end{bmatrix}^{-1}\begin{bmatrix}
+    y-Du\\ \hat z
+\end{bmatrix}
+$$ и закона управления $u=K\hat x.$ В качестве модального регулятора
+$K$ будет использоваться матрица синтезированная в предыдущем задании.
+Зададимся желаемыми матрицами наблюдателя пониженного порядка $\Gamma$ со спектром
+$\{-10,\ -10\}$ и $Y$, обеспечивающими существование решения уравнения Сильвестра 
+\begin{equation*}
+    \Gamma Q-QA=YC,
+\end{equation*}
+которое возникает при рассмотрении невязки наблюдателя пониженного порядка,
+и асимптотическую устойчивость замкнутой системы:
+\begin{equation*}
+    \Gamma=\begin{bmatrix}
+        -10 &  0 \\
+         0 & -10
+    \end{bmatrix},\quad
+    Y=\begin{bmatrix}
+        1& 0\\ 
+        0& 1
+    \end{bmatrix}
+\end{equation*}
+С помощью CVX получим матрицу $Q$:
+\begin{equation*}
+    Q=\begin{bmatrix}
+        -0.1446&	-0.1281&	-0.1411&	0.0862\\
+        0.1411&	0.0862&	0.1446&	-0.1281
+    \end{bmatrix}.
+\end{equation*}
+Выполним компьютерное моделирование с начальными условиями системы
+$
+x(0)=\begin{bmatrix}
+    1&1&1&1
+\end{bmatrix}^T
+$
+и наблюдателя
+$\hat z(0)=\begin{bmatrix}
+    0&0
+\end{bmatrix}^T.$ Построим графики формируемого регулятором 
+управления $u(t)$, вектора состояния наблюдателя пониженной 
+размерности $\hat z$ и невязки $e(t) = x(t) - \hat x(t).$ \autoref{fig:4_2}, 
+сравнительные графики $x(t)$ и $\hat x(t)$ \autoref{fig:4_1}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{figs/task4_slx.png}
+    \caption{Структурная схема для задания 4}
+    \label{fig:4}
+\end{figure}
+
+\subsection{Вывод}
+
+Система с наблюдателем пониженного порядка успешно реализована. 
+Как видно из графиков, наблюдатель корректно приближает состояние 
+системы, а регулятор обеспечивает стабилизацию. Невязка наблюдателя 
+стремится к нулю, что подтверждает правильность работы наблюдателя.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{figs/task4_1.png}
+    \caption{Сравнительные графики $x$ и $\hat x$ системы задания 4}
+    \label{fig:4_1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{figs/task4_2.png}
+    \caption{Графики управления $u(t)$, невязки $e(t)$ и состояние наблюдателя
+    пониженной размерности $\hat z$ системы задания 4}
+    \label{fig:4_2}
+\end{figure}
+
+
+
+
+
+\section{Заключение}
+
+В данной лабораторной работе были рассмотрены методы синтеза модальных 
+регуляторов, наблюдателей полного и пониженного порядка, а также модального 
+управления по выходу. Были исследованы различные варианты спектров, их влияние 
+на поведение системы и требования к параметрам. Проведено компьютерное 
+моделирование, подтверждающее корректность полученных решений.
