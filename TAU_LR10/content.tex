@@ -62,8 +62,8 @@ Cобственные числа матрицы $A$
 Построим схему моделирования (см. \autoref{fig:sys1}) системы \eqref{eq:sys1} с регулятором $u=Kx$.
 \begin{figure}[H]
     \centering
-    \caption{Схема моделирования системы \eqref{eq:sys1} с регулятором $u=Kx$}
     \includegraphics[width=0.8\textwidth]{figs/task1_slx.png}
+    \caption{Схема моделирования системы \eqref{eq:sys1} с регулятором $u=Kx$}
     \label{fig:sys1}
 \end{figure}
 
@@ -233,9 +233,9 @@ $K_1$ и $K_2$ - крайности, а $K_3$ и $K_4$ ``сидят'' где-т�
 
 \begin{figure}[H]
     \centering
+    \includegraphics[width=\linewidth]{figs/task10.png}
     \caption{Моделирование системы \eqref{eq:sys1} с регулятором вида $u=Kx$
     со степенью устойчивости $\alpha=2$}
-    \includegraphics[width=\linewidth]{figs/task10.png}
     \label{fig:1k1}
 \end{figure}
 
@@ -332,6 +332,14 @@ $K_4$, и в этот раз системы с регуляторами $K_3$ И
 связано с тем что в этот раз спектры соответствующих замкнуных систем отличаются
 гораздо сильнее.
 
+\newpage
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{figs/task11.png}
+    \caption{Моделирование системы \eqref{eq:sys1} с регулятором вида $u=Kx$
+    со степенью устойчивости $\alpha=0.2$}
+    \label{fig:2k1}
+\end{figure}
 
 \subsection{Выводы}
 
@@ -341,15 +349,6 @@ $K_4$, и в этот раз системы с регуляторами $K_3$ И
 степень устойчивости. Однако, регуляторы, найденные через Ляпунова, продемонстрировали 
 крайние значения управления, в то время как регуляторы из Риккати оказались более 
 средними. Моделирование подтвердило корректность синтеза.
-
-
-\begin{figure}[H]
-    \centering
-    \caption{Моделирование системы \eqref{eq:sys1} с регулятором вида $u=Kx$
-    со степенью устойчивости $\alpha=0.2$}
-    \includegraphics[width=\linewidth]{figs/task11.png}
-    \label{fig:2k1}
-\end{figure}
 
 
 
@@ -501,10 +500,10 @@ $K_4$, и в этот раз системы с регуляторами $K_3$ И
 и наблюдателем состояния $\dot{\hat x}=A\hat x+Bu+L(C\hat x-y)$.
 \begin{figure}[H]
     \centering
+    \includegraphics[width=\textwidth]{figs/task2_slx.png}
     \caption{Схема моделирования системы \eqref{eq:sys2} 
     с законом управления $u=K\hat x$
     и наблюдателем состояния $\dot{\hat x}=A\hat x+Bu+L(C\hat x-y)$}
-    \includegraphics[width=\textwidth]{figs/task2_slx.png}
     \label{fig:sys2}
 \end{figure}
 
@@ -630,14 +629,14 @@ $\hat x(t)$, а также график ошибки наблюдателя $e(t
 
 \begin{figure}[H]
     \centering
+    \includegraphics[width=\linewidth]{figs/task2_1.png}
     \caption{Моделирование системы \eqref{eq:sys2} с регулятором вида $u=K\hat x$
     и наблюдателем состояния $\dot{\hat x}=A\hat x+Bu+L(C\hat x-y)$ при $\alpha_K=\alpha_L$}
-    \includegraphics[width=\linewidth]{figs/task2_1.png}
     \label{fig:21}
 \end{figure}
 
 
-
+\newpage
 \subsection{Второй набор степеней устойчивости}
 
 
@@ -685,9 +684,9 @@ $\hat x(t)$, а также график ошибки наблюдателя $e(t
 
 \begin{figure}[H]
     \centering
+    \includegraphics[width=\linewidth]{figs/task2_2.png}
     \caption{Моделирование системы \eqref{eq:sys2} с регулятором вида $u=K\hat x$
     и наблюдателем состояния $\dot{\hat x}=A\hat x+Bu+L(C\hat x-y)$ при $\alpha_K>\alpha_L$}
-    \includegraphics[width=\linewidth]{figs/task2_2.png}
     \label{fig:22}
 \end{figure}
 
@@ -733,13 +732,13 @@ $\hat x(t)$, а также график ошибки наблюдателя $e(t
 
 \begin{figure}[H]
     \centering
+    \includegraphics[width=\linewidth]{figs/task2_3.png}
     \caption{Моделирование системы \eqref{eq:sys2} с регулятором вида $u=K\hat x$
     и наблюдателем состояния $\dot{\hat x}=A\hat x+Bu+L(C\hat x-y)$ при $\alpha_K<\alpha_L$}
-    \includegraphics[width=\linewidth]{figs/task2_3.png}
     \label{fig:23}
 \end{figure}
 
-
+\newpage
 \subsection{Выводы}
 
 Были рассмотрены три различных набора степеней устойчивости регулятора $\alpha_K$ 
@@ -885,9 +884,9 @@ $Q$, $R$ - симметричные положительно-полуопред�
 
 \begin{figure}[H]
     \centering
+    \includegraphics[width=\linewidth]{figs/task3.png}
     \caption{Спектры замкнутых систем \eqref{eq:sys1} с регулятором с 
     качественной экспоненциальной устойчивостью}
-    \includegraphics[width=\linewidth]{figs/task3.png}
     \label{fig:riccati1}
 \end{figure}
 
@@ -916,9 +915,9 @@ $Q$ и $R$.
 
 \begin{figure}[H]
     \centering
+    \includegraphics[width=\linewidth]{figs/task31.png}
     \caption{Моделирование замкнутой системы \eqref{eq:sys1} с регулятором с
     качественной экспоненциальной устойчивостью}
-    \includegraphics[width=\linewidth]{figs/task31.png}
     \label{fig:riccati2}
 \end{figure}
 
