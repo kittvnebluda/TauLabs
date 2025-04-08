@@ -1,0 +1,181 @@
+\section{Компенсирующий регулятор по состоянию}
+\subsection{Анализ системы}
+Рассмотрим систему 
+\begin{equation}
+    \dot x=Ax+Bu+B_fw_f,\quad x(0)=\begin{bmatrix}
+        0&0&0
+    \end{bmatrix}^T,
+    \label{eq:sys1}
+\end{equation}
+генератор внешнего возмущения
+\begin{equation*}
+    \dot w_f=\Gamma w_f,\quad w_f(0)=\begin{bmatrix}
+        1&1&1&1
+    \end{bmatrix}^T
+\end{equation*}
+и виртуальный выход вида
+\begin{equation*}
+    z=C_Zx,
+\end{equation*}
+где
+\begin{equation*}
+    A=\begin{bmatrix}
+        3&5&4\\
+        -2&-4&-5\\
+        2&2&3
+    \end{bmatrix},\quad
+    B=\begin{bmatrix}
+        2\\-1\\1
+    \end{bmatrix},\quad
+    B_f=\begin{bmatrix}
+        -2&0&0&2\\
+        -2&0&0&0\\
+        0&0&0&0
+    \end{bmatrix},\quad
+\end{equation*}
+\begin{equation*}
+    \Gamma=\begin{bmatrix}
+        35&56&22&-42\\
+        -11&-17&-7&12\\
+        -6&-10&-5&10\\
+        11&18&6&-13
+    \end{bmatrix},\quad
+    C_Z=\begin{bmatrix}
+        2&3&3
+    \end{bmatrix}.
+\end{equation*}
+Собственные числа матрицы $\Gamma$
+\begin{equation*}
+    \sigma(\Gamma)=\{\pm3i,\ \pm i\},
+\end{equation*}
+внешнее возмущение имеет вид суммы гармоник с увеличевающейся
+со временем амплитудой:
+\begin{equation*}
+    w(t)=t(a\cos(t)+b\sin(t) + c\cos(3t)+d\sin(3t)).
+\end{equation*}
+Построим схему моделирования системы \eqref{eq:sys1},
+замкнутой компенсирующим регулятором
+\begin{equation}
+    u=K_1x+K_2w_f,
+    \label{eq:reg1}
+\end{equation}
+обеспечивающим выполнение целевого условия
+\begin{equation*}
+    \lim_{t\rightarrow\infty}z(t)=0.
+\end{equation*}
+Схему можно увидеть на \autoref{fig:sys1}.
+Проверим стабилизируема ли система (пара ($A$, $B$)).
+\begin{equation*}
+    \sigma(A)=\{2\pm i,\ -i\},
+\end{equation*}
+\begin{equation*}
+    H_1=\begin{bmatrix}
+        -1 + i & -5 & -4 & 2 \\
+        2 & 6 + i & 5 & -1 \\
+        -2 & -2 & -1 + i & 1
+    \end{bmatrix},\quad \text{rank}(H_1)=3,
+\end{equation*}
+\begin{equation*}
+    H_2=\begin{bmatrix}
+        -1 - i & -5 & -4 & 2 \\
+        2 & 6 - i & 5 & -1 \\
+        -2 & -2 & -1 - i & 1
+    \end{bmatrix},\quad \text{rank}(H_2)=3,
+\end{equation*}
+\begin{equation*}
+    H_3=\begin{bmatrix}
+        -5 & -5 & -4 & 2 \\
+        2 & 2 & 5 & -1 \\
+        -2 & -2 & -5 & 1
+    \end{bmatrix},\quad \text{rank}(H_3)=2.
+\end{equation*}
+Пара ($A$, $B$) не является полностью управляемой, но
+стабилизируема, этого достаточно для синтеза регулятора.
+
+\begin{figure}[H]
+    \centering
+    
+    \caption{Схема моделирования системы \eqref{eq:sys1},
+    замкнутой компенсирующим регулятором \eqref{eq:reg1}}
+    \label{fig:sys1}
+\end{figure}
+
+\subsection{Синтез ``feedback''-компоненты}
+
+Синтезируем «feedback»-компоненту $K_1$ компенсирующего регулятора \eqref{eq:reg1}
+с помощью уравнения Сильвестра:
+\begin{equation*}
+    AP-P\Gamma_R=BY,\quad K=-YP^{-1}.
+\end{equation*}
+Но сначала нужно усечть систему. Найдем жордановые формы матриц:
+\begin{equation*}
+    A_J=\begin{bmatrix}
+        -2&     0&     0\\
+        0&     2&    -1\\
+        0&     1&     2   
+    \end{bmatrix},\quad
+    B_J=\begin{bmatrix}
+        0\\
+        0.7071\\
+       -2.1213
+    \end{bmatrix},\quad
+    P_J = \begin{bmatrix}
+        -1&    0.7071&   -0.7071\\
+        1&   -1.4142&         0\\
+             0    &1.4142&         0
+    \end{bmatrix},
+\end{equation*}
+где $P_J$ - матрица перехода. Усечем до следущих матриц:
+\begin{equation*}
+    A_j=\begin{bmatrix}
+        2&    -1\\
+        1&     2   
+    \end{bmatrix},\quad
+    B_j=\begin{bmatrix}
+        0.7071\\
+       -2.1213
+    \end{bmatrix}.
+\end{equation*}
+возьмем следующие матрицы $\Gamma_R$ и $Y$, чтобы итоговый спект был устойчив и
+пара ($\Gamma_R$, $Y$) наблюдаема
+\begin{equation*}
+    \Gamma_R=\begin{bmatrix}
+        -10 & 1\\0&-10
+    \end{bmatrix},\quad
+    Y=\begin{bmatrix}
+        1 & 0
+    \end{bmatrix}.
+\end{equation*}
+Используя CVX получим следующую матрицу регулятора
+\begin{equation*}
+    K_{1_j}=\begin{bmatrix}
+        -64.0645&-10.0410
+    \end{bmatrix},
+\end{equation*}
+расширим и вернем в изначальный базис
+\begin{equation*}
+    K_1=\begin{bmatrix}
+        0&K_{1_j}
+    \end{bmatrix}\times P_J^{-1}=
+    \begin{bmatrix}
+        14.2001&	14.2001&	-38.2004
+    \end{bmatrix}.
+\end{equation*}
+Проверим, что получили желаемый спектр
+\begin{equation*}
+    \sigma(A+BK_1)=\{-9.9628,\    -10.0374,\    -2.0000\}.
+\end{equation*}
+Регулятор найден успешно.
+
+
+\subsection{Синтез ``feedforward''-компоненты}
+
+Синтезируем «feedforward»-компоненту $K_2$ компенсирующего регулятора \eqref{eq:reg1}.
+С помощью CVX решим следующую систему
+\begin{equation*}
+    \begin{cases}
+        P\Gamma-AP=BY+B_f\\
+        C_ZP=0
+    \end{cases}
+\end{equation*}
+относительно $P$ и $Y$.
