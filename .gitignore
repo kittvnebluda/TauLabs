@@ -9,3 +9,6 @@
 *slprj*
 *.slxc
 *.pdf
+*.run.xml
+*.bbl
+*.bcf

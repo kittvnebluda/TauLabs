@@ -1,0 +1,43 @@
+\documentclass[12pt,a4paper]{report}
+
+% Includes for external settings, packages, and configurations
+\include{config}
+\include{settings/packages}
+\include{settings/preferences}
+
+\setlength{\headheight}{15pt}
+
+% Fancyhdr setup
+\pagestyle{fancy}
+\fancyhf{} % Clear all header/footer
+\fancyhead[L]{Курсовой проект} % Left side of header
+\fancyhead[R]{\leftmark} % Right side of header, with section title
+\fancyfoot[C]{\thepage}
+
+% Redefine \sectionmark to update \leftmark correctly
+\renewcommand{\sectionmark}[1]{\markboth{#1}{}}
+
+% Change max matrix columns
+\setcounter{MaxMatrixCols}{20}
+
+\addbibresource{references.bib} % Файл с библиографией
+
+\usetikzlibrary{arrows.meta,calc}
+
+% Redefine chapter format
+% \titleformat{\chapter}[block] % Style: block
+%   {\filcenter\Large} % Formatting: centered, large, bold
+%   {ГЛАВА \thechapter.} % Label: Chapter number
+%   {1em} % Spacing between label and title
+%   {\MakeUppercase} % Title text formatting: uppercase
+
+\begin{document}
+
+% Include titlepage and content
+\include{templates/titlepage}
+\tableofcontents
+\include{content}
+
+\printbibliography[title={Список литературы}]
+
+\end{document}
